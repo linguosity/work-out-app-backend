@@ -1,4 +1,4 @@
-const db = require("../models");
+const db = require("../models/User");
 const bcrypt = require("bcrypt");
 const {createToken} = require("../middleware/verifyToken");
 
@@ -7,7 +7,7 @@ const signup = async(req, res) => {
         const {email, username, password} = req.body;
 
         //prep the query for execution
-        const query = db.User.User.find({});
+        const query = db.User.find({});
 
         //check for existing username and/or email
         query.or([{username: username}, {email: email}]);
@@ -28,7 +28,7 @@ const signup = async(req, res) => {
         req.body.password = hash;
 
         //signup the user (create)
-        const createdUser = await db.User.User.create(req.body);
+        const createdUser = await db.User.create(req.body);
         await createdUser.save();
 
         return res.status(201).json({message: "User successfully registered", userId: createdUser.id});
@@ -42,7 +42,7 @@ const signup = async(req, res) => {
 const login = async(req,res) => {
     try{
         const {username, email, password} = req.body;
-        const query = db.User.User.find({});
+        const query = db.User.find({});
 
         //search users that match both fields/values
         query.and([{username: username}, {email: email}]);
@@ -75,7 +75,7 @@ const login = async(req,res) => {
 const getUser = async(req,res)=>{
     try{
         const id = req.params.id;
-        const query = db.User.User.findById(id);
+        const query = db.User.findById(id);
 
         // exclude password from returning with query
         query.select("-password");
