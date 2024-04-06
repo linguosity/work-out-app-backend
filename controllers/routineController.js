@@ -6,7 +6,7 @@ const { verifyToken } = require("../middleware/verifyToken");
 //upon successful delete, message is sent back to user via json
 const deleteRoutine = async(req,res,next) => {
 
-    const { userId, routineId } = req.params
+    const { userId, routineId } = req.params;
     
     try{
 
@@ -21,9 +21,23 @@ const deleteRoutine = async(req,res,next) => {
 //upon successful update, message is sent back to user via json
 const updateRoutine = async(req, res, next) => {
 
-    const newRoutine = req.body;
-
+    const {userId, routineId} = req.params;
+    const updatedRoutine = req.body;
+    
+    console.log("Updated Routine", updatedRoutine);
     try{
+        //find schema by userId
+        const user = await User.findById(userId);
+
+        //find routine to update by routineId
+        const oldRoutine = user.routines.id(routineId);
+
+        console.log("This is the old routine", oldRoutine);
+
+        //update entire oldRoutine with updatedRoutine
+        Object.assign(oldRoutine, updatedRoutine);
+        await user.save();
+
 
     }catch(err){
         console.log(err);
@@ -45,14 +59,12 @@ const createRoutine = async(req, res, next) => {
 
         await user.save();
 
-        console.log("success");
-
+        return res.status(201).json({message: "User successfully created", userId})
 
     }catch(err){
         console.log(err);
     }
 }
-
 
 module.exports = {
    deleteRoutine,
