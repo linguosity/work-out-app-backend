@@ -19,7 +19,7 @@ router.delete( "/user/:userId", verifyToken, userCtrl.deleteUser);
 router.delete( "/user/:userId/routine/:routineId", verifyToken, routineCtrl.deleteRoutine)
 
 //delete exercise 
-router.delete( "/user/:userId/routine/:routineId/exercise/:exerciseId", verifyToken, exerciseCtrl.deleteExcercise)
+router.delete( "/user/:userId/routine/:routineId/exercise/:exerciseId", verifyToken, exerciseCtrl.deleteExercise)
 
 /*---- UPDATE ----*/
 //update user
@@ -31,15 +31,17 @@ router.put("/user/:userId/routine/:routineId", verifyToken, routineCtrl.updateRo
 //update exercise
 router.put("/user/:userId/routine/:routineId/exercise/exerciseId", verifyToken, exerciseCtrl.updateExercise)
 
+
 /*---- CREATE----*/
+
 //create user
 router.post("/user/:userId", verifyToken, userCtrl.createUser)
 
 //create routine
-router.post("/user/:userId/routine/:routineId", verifyToken, routineCtrl.createRoutine)
+router.post("/user/:userId/routine", verifyToken, routineCtrl.createRoutine)
 
 //create exercise
-router.post("/user/:userId/routine/:routineId/exercise/:exerciseId", verifyToken, exerciseCtrl.createExercise)
+router.post("/user/:userId/routine/:routineId/exercise", verifyToken, exerciseCtrl.createExercise)
 
 
 module.exports = router;

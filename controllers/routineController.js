@@ -1,8 +1,8 @@
-const db = require("../models/User");
+const {User, Routine, Exercise} = require("../models/User");
 const bcrypt = require("bcrypt");
 const { verifyToken } = require("../middleware/verifyToken");
 
-//delete functions use req.params to access user, routine and excercise
+//delete functions use req.params to access user, routine and exercise
 //upon successful delete, message is sent back to user via json
 const deleteRoutine = async(req,res,next) => {
 
@@ -33,12 +33,23 @@ const updateRoutine = async(req, res, next) => {
 }
 
 const createRoutine = async(req, res, next) => {
-    const newRoutine = req.body;
+    const userId = req.params.userId;
 
     try{
+        const user = await User.findById(userId);
+        const newRoutine = await Routine.create(req.body);
+
+        console.log("New Routine: ", newRoutine);
+        console.log("user: ", user);
+        user.routines.push(newRoutine);
+
+        await user.save();
+
+        console.log("success");
+
 
     }catch(err){
-
+        console.log(err);
     }
 }
 

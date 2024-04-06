@@ -1,6 +1,6 @@
 const { default: mongoose } = require("mongoose");
 
-const excerciseSchema = new mongoose.Schema({
+const exerciseSchema = new mongoose.Schema({
     name: {type: String},
     sets: {type: Number, min: 0},
     reps: {type: Number, min:0},
@@ -9,7 +9,7 @@ const excerciseSchema = new mongoose.Schema({
 
 const routineSchema = new mongoose.Schema({
     name: {type: String},
-    excercises: [excerciseSchema],
+    exercises: [exerciseSchema],
     day: [String],
 })
 
@@ -27,6 +27,6 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema);
 const Routine = mongoose.model("Routine", routineSchema)
-const Excercise = mongoose.model("Excercise", excerciseSchema)
+const Exercise = mongoose.model("Exercise", exerciseSchema)
 
-module.exports = {User, Routine, Excercise};
+module.exports = {User, Routine, Exercise};

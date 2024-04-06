@@ -5,7 +5,7 @@ const { verifyToken } = require("../middleware/verifyToken");
 
 //delete functions use req.params to access user, routine and excercise
 //upon successful delete, message is sent back to user via json
-const deleteExcercise = async(req,res,next) => {
+const deleteExercise = async(req,res,next) => {
 
     const { userId, routineId, exerciseId } = req.params
     
@@ -23,6 +23,7 @@ const deleteExcercise = async(req,res,next) => {
             },  // Match the provider document
             { $pull: { exercises: { _id: exerciseId } } } // Remove the student from the students array
         );
+        return res.status("hello");
 
     }catch(err){
         console.log(err);
@@ -57,7 +58,7 @@ const createExercise = async(req, res, next) => {
 }
 
 module.exports = {
-   deleteExcercise,
+   deleteExercise,
    updateExercise,
    createExercise
 }
