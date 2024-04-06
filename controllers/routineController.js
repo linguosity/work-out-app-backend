@@ -33,6 +33,7 @@ const deleteRoutine = async(req,res,next) => {
 
 //update routines use req.body to pass user data from front end to database for update
 //upon successful update, message is sent back to user via json
+// RETURNING OBJECT {BLAH BLAH}
 const updateRoutine = async(req, res, next) => {
 
     const {userId, routineId} = req.params;
