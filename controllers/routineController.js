@@ -10,6 +10,20 @@ const deleteRoutine = async(req,res,next) => {
     
     try{
 
+        //find schema by userId
+        const user = await User.findById(userId);
+
+        //find routine to update by routineId
+        const oldRoutine = user.routines.id(routineId);
+
+        console.log("This is the old routine", oldRoutine);
+
+        //delete routine
+        await User.updateOne(
+            {_id: userId },
+            { $pull: { routines: {_id: routineId}}}
+        );
+
 
     }catch(err){
         console.log(err);
