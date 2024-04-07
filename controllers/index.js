@@ -34,9 +34,6 @@ router.put("/user/:userId/routine/:routineId/exercise/exerciseId", verifyToken, 
 
 /*---- CREATE----*/
 
-//create user
-router.post("/user/:userId", verifyToken, userCtrl.createUser)
-
 //create routine
 router.post("/user/:userId/routine", verifyToken, routineCtrl.createRoutine)
 
