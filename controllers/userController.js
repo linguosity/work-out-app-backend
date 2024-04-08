@@ -4,9 +4,9 @@ const {createToken} = require("../middleware/verifyToken");
 
 const signup = async(req, res) => {
     try{
-        console.log("7");
+        
         const {email, username, password} = req.body;
-
+        console.log("Req body: ", req.body);
         //prep the query for execution
         const query = User.find({});
 
@@ -15,7 +15,7 @@ const signup = async(req, res) => {
 
         //execute the query
         const foundUser = await query.exec();
-        console.log("17");
+        
         // return message if user and/or email already exist
         if(foundUser.length !== 0){
             return res.status(400).json({message: "Username or Email already taken"});
@@ -27,7 +27,7 @@ const signup = async(req, res) => {
 
         //replace raw password with hashed password 
         req.body.password = hash;
-        console.log("29");
+        
         //signup the user (create)
         const createdUser = await User.create(req.body);
         await createdUser.save();
