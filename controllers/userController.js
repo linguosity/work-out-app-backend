@@ -86,13 +86,19 @@ const login = async(req,res) => {
         //if password matches give the foundUserdata to create the JWT
         const token = createToken(foundUser[0]);
         
-        
-
         //return date to variable
         //const lastDate = await findLastWorkout(foundUser[0]._id);
 
         //passthe frontend our JWT with the user
-        return res.status(200).json({token, id: foundUser[0]._id, username: foundUser[0].username})
+        return res.status(200).json({
+            token, 
+            id: foundUser[0]._id,
+            username: foundUser[0].username,
+            firstname: foundUser[0].firstName,
+            lastname: foundUser[0].lastName,
+            dob: foundUser[0].DOB,
+            bodyWeight: foundUser[0].bodyWeight
+            })
     }catch(err){
         console.log(err);
         return res.status(500).json({error: "Internal server error"});
