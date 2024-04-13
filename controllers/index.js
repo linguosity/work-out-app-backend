@@ -11,6 +11,9 @@ router.post("/auth/signup", userCtrl.signup);
 router.post("/auth/login", userCtrl.login);
 router.get("/user/:id", verifyToken, userCtrl.getUser);
 
+/*----SHOW-----*/
+router.get("/user/:userid/routines", verifyToken, routineCtrl.readRoutine);
+
 /*---- DELETE ----*/
 //delete user
 router.delete( "/user/:userId", verifyToken, userCtrl.deleteUser);
