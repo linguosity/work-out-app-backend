@@ -5,13 +5,13 @@ const exerciseSchema = new mongoose.Schema({
     sets: {type: Number, min: 0},
     reps: {type: Number, min:0},
     weight: {type: Number, min:0, max:1000},
-})
+}, {timestamps: true})
 
 const routineSchema = new mongoose.Schema({
     name: {type: String},
     exercises: [exerciseSchema],
     day: [String],
-})
+}, {timestamps: true})
 
 const userSchema = new mongoose.Schema({
     username: {type: String, unique: true, required: true},

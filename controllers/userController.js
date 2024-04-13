@@ -2,6 +2,26 @@ const {User, Routine, Exercise } = require("../models/User");
 const bcrypt = require("bcrypt");
 const {createToken} = require("../middleware/verifyToken");
 
+const findLastWorkout = async(userId) => {
+
+    try{
+        const result = await User.aggregate([
+            { $match: { _id: Mongoose.Types.ObjectId(userId)} },
+            { $unwind: '$routines'},
+            { $unwind: '$routines.workouts' },
+            { $sort: { 'routines.workouts.date': -1} },
+            { $limit: 1},
+            { $project: { _id: 0, date: '$routines.workouts.date'}}
+        ]);
+
+        return result.length > 0 ? result[0].date : null;
+
+    }catch(error){
+        console.error("Failed to find last workout:", error);
+        return null;
+    }
+}
+
 const signup = async(req, res) => {
     try{
         
@@ -65,9 +85,12 @@ const login = async(req,res) => {
 
         //if password matches give the foundUserdata to create the JWT
         const token = createToken(foundUser[0]);
+        
+        //return date to variable
+        //const lastDate = await findLastWorkout(foundUser[0]._id);
 
         //passthe frontend our JWT with the user
-        return res.status(200).json({token, id: foundUser[0]._id})
+        return res.status(200).json({token, id: foundUser[0]._id, username: foundUser[0].username, lastDate: lastDate})
     }catch(err){
         console.log(err);
         return res.status(500).json({error: "Internal server error"});
