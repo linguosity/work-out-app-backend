@@ -4,8 +4,7 @@ An intuitive fitness app that makes it simple to monitor your daily achievements
 
 ## 📸 Screenshots
 
-![Landing Page](path/to/landing_page_screenshot.png)
-_Additional descriptions or screenshots as needed_
+[See](https://github.com/linguosity/work-out-app-frontend/blob/main/README.md)
 
 ## 🔧 Technologies Used
 
@@ -17,7 +16,7 @@ _Additional descriptions or screenshots as needed_
 
 ## 🚀 Getting Started
 
-[Click here](https://yourappname.herokuapp.com) to start tracking your fitness journey.
+[Click here](https://fitnessapp-dba780bed1f6.herokuapp.com/api/) to start tracking your fitness journey.
 
 For a detailed setup, visit our planning board:
 [Trello Board - Workout App](https://trello.com/b/uXBrN7si/work-out-app)
