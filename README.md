@@ -18,7 +18,7 @@ An intuitive fitness app that makes it simple to monitor your daily achievements
 
 [Click here](https://fitnessapp-dba780bed1f6.herokuapp.com/api/) to start tracking your fitness journey.
 
-For a detailed setup, visit our planning board:
+For a detail of the process, visit our planning board:
 [Trello Board - Workout App](https://trello.com/b/uXBrN7si/work-out-app)
 
 ## 🌱 Next Steps
